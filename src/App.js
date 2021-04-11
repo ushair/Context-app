@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React, { createContext ,useState} from 'react'
 import './App.css';
+import CompA from './Components/CompA';
+import CompB from './Components/CompB';
 
+const Number = createContext();
+const ChangeNum = createContext();
 function App() {
+
+  function IncNum(){
+    setnumber(number+1)
+  }
+  const [number, setnumber] = useState(1)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Number.Provider value={number}>
+    <ChangeNum.Provider value={IncNum}>
+    <CompA/>
+    </ChangeNum.Provider>
+    </Number.Provider>
     </div>
   );
 }
 
 export default App;
+export  {Number,ChangeNum}
